@@ -18,7 +18,7 @@ const quotes = [{quote: "I love you the more in that I believe you had liked me 
                 tag: "Motivational"},
                 {quote: "There is nothing permanent except change.",
                 source: "Heraclitus",
-                year: "535BC - 475BC",
+                date: "535BC - 475BC",
                 tag: "Philosophical"},
                 {quote: "You cannot shake hands with a clenched fist.",
                 source: "Indira Gandhi",
@@ -27,9 +27,10 @@ const quotes = [{quote: "I love you the more in that I believe you had liked me 
                 {quote: "Let us sacrifice our today so that our children can have a better tomorrow.",
                 source: "A. P. J. Abdul Kalam",
                 citation: "brainyquote.com",
-                year: "2003",
+                date: "2003",
                 tag: "Philosophical"}];
 
+// array of colors for background to change between
 const colors = ['red', 'blue', 'green', 'orange', 'purple']
 
 //random quote generator
@@ -43,6 +44,8 @@ function bkgdColor(){
     const ran = Math.floor(Math.random()*colors.length);
     document.body.style.background = colors[ran];
   }
+
+//30 sec time interval for changing both background color and quote
 window.setInterval("bkgdColor()",30000);
 window.setInterval("printQuote()",30000);
 
@@ -57,7 +60,7 @@ function printQuote() {
   const quote = randomquote.quote;
   const source = randomquote.source;
   const citation = randomquote.citation;
-  const year = randomquote.year;
+  const year = randomquote.date;
   const tag = randomquote.tag;
 
 
@@ -79,20 +82,20 @@ function printQuote() {
 
   //checking if quote objects contain either a year and/or citation
   //if any are true, then creating respective elements and appending to sourced
-  if((randomquote.year || randomquote.citation)){
+  if((randomquote.date || randomquote.citation)){
     if(randomquote.citation){
       const citationed = document.createElement("span");
       citationed.className = "citation";
       citationed.innerHTML = citation;
       sourced.appendChild(citationed);
-      if(randomquote.year){
+      if(randomquote.date){
         const yeared = document.createElement("span");
         yeared.className = "year";
         sourced.appendChild(yeared);
         yeared.innerHTML = year;
       }
     }
-    else if(randomquote.year){
+    else if(randomquote.date){
       const yeared = document.createElement("span");
       yeared.className = "year";
       sourced.appendChild(yeared);
