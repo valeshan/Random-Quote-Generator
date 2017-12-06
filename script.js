@@ -1,7 +1,8 @@
-// event listener to respond to "Show another quote" button clicks
-// when user clicks anywhere on the button, the "printQuote" function is called
+//assigned variable to quote-box element
 const quoteBox = document.getElementById("quote-box");
 
+
+//list of quotes
 const quotes = [{quote: "I love you the more in that I believe you had liked me for my own sake and for nothing else.",
                 source: "John Keats",
                 citation: "brainyquote.com",
@@ -23,26 +24,41 @@ const quotes = [{quote: "I love you the more in that I believe you had liked me 
                 citation: "brainyquote.com",
                 year: "2003"}];
 
+//random quote generator
 function getRandomQuote(){
   const ran = Math.floor(Math.random()*quotes.length);
   return quotes[ran];
 }
 
+
+//print quote
 function printQuote() {
-  while(quoteBox.firstChild){
+  while(quoteBox.firstChild){                   //removes previous child elements (clean slate)
     quoteBox.removeChild(quoteBox.firstChild);
   }
+
+  //assigning object and object attributes to variables
   const randomquote = getRandomQuote();
   const quote = randomquote.quote;
   const source = randomquote.source;
   const citation = randomquote.citation;
   const year = randomquote.year;
+
+
+  //creating elements
   const quoted = document.createElement("p");
   const sourced = document.createElement("p");
-  sourced.innerHTML = source;
+
+  //assigning class names to elements
   quoted.className = "quote";
   sourced.className = "source";
+
+  //placing HTML content inside elements
+  sourced.innerHTML = source;
   quoted.innerHTML = quote;
+
+  //checking if quote objects contain either a year and/or citation
+  //if any are true, then creating respective elements and appending to sourced
   if((randomquote.year || randomquote.citation)){
     if(randomquote.citation){
       const citationed = document.createElement("span");
@@ -63,9 +79,12 @@ function printQuote() {
       yeared.innerHTML = year;
       }
     }
+
+  //appending child elements to the quote-box parent element
   quoteBox.appendChild(quoted);
   quoteBox.appendChild(sourced);
 };
 
-
+// event listener to respond to "Show another quote" button clicks
+// when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
